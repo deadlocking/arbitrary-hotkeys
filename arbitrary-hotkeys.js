@@ -12,13 +12,12 @@
 	```
 
 	* Create a div inside head with id="hotkeys" and list the hotkeys you want 
-	in this form - "hotkey || id_of_your_html_hyperlink" (<a> tag)
+	in this form:
+	`<hotkey key="your_hotkey" targetId="id_of_your_html_hyperlink"></hotkey>`
 	Example:
 	```
-		<div id="hotkeys">
-			git || github
-			goo || google
-		</div>
+		<hotkey key="git" targetId="github"></hotkey>
+		<hotkey key="goo" targetId="google"></hotkey>
 	```
 
 	* Enjoy!
@@ -33,22 +32,27 @@
 	<https://github.com/Yuri-M-Dias/arbitrary-hotkeys>
 */
 
+$(document.createElement('hotkey'));
+$(document.createAttribute('key'));
+$(document.createAttribute('targetId'));
+
 $(document).ready(function() {
 
-	// Detects all hotkeys on the <div id = "hotkeys">
-	var hotkeys = $("#hotkeys").text().split("\n");
+	// Detects all hotkeys on the <hotkey> tag
+	var hotkeys = document.getElementsByTagName('hotkey');
+
 	//Cleans the HTML
-	$("#hotkeys").empty();
+	$('hotkey').empty();
 
 	var strokesMapping = [];
+
 	// maps each stroke to an object
 	for(var key in hotkeys){
-		//Splits on the ||
-		var map = hotkeys[key].split("||");
+
 		//Maps to a nice object because it's more organized this way, though not needed.
 		var combination = {
-			key: jQuery.trim(map[0]),
-			targetId: jQuery.trim(map[1])
+			key: hotkeys[key].attributes[0].value,
+			targetId: hotkeys[key].attributes[1].value
 		};
 		//Eliminates undefined ones
 		if(combination.key === void 0 || combination.key === '' ||
