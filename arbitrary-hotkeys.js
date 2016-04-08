@@ -1,29 +1,29 @@
 $(document).ready(function() {
 
-    // Detects all keystrokes on the <div id = "keyStrokes">
-	var keyStrokes = $("#keyStrokes").text().split("\n");
-    //Cleans the HTML
-    $("#keyStrokes").empty();
+	// Detects all hotkeys on the <div id = "hotkeys">
+	var hotkeys = $("#hotkeys").text().split("\n");
+	//Cleans the HTML
+	$("#hotkeys").empty();
 
-    var strokesMapping = [];
-    // maps each stroke to an object
-    for(var key in keyStrokes){
-        //Splits on the ||
-        var map = keyStrokes[key].split("||");
-        //Maps to a nice object because it's more organized this way, though not needed.
-        var combination = {
-            key: jQuery.trim(map[0]),
-            targetId: jQuery.trim(map[1])
-        };
-        //Eliminates undefined ones
-        if(combination.key === void 0 || combination.key === '' ||
-                combination.targetId === void 0 || combination.targetId === ''){
-            continue;
-        }
-        //Adds to the avaliable ones.
-        strokesMapping.push(combination);
-    }
-    console.log(strokesMapping);
+	var strokesMapping = [];
+	// maps each stroke to an object
+	for(var key in hotkeys){
+		//Splits on the ||
+		var map = hotkeys[key].split("||");
+		//Maps to a nice object because it's more organized this way, though not needed.
+		var combination = {
+			key: jQuery.trim(map[0]),
+			targetId: jQuery.trim(map[1])
+		};
+		//Eliminates undefined ones
+		if(combination.key === void 0 || combination.key === '' ||
+				combination.targetId === void 0 || combination.targetId === ''){
+			continue;
+		}
+		//Adds to the avaliable ones.
+		strokesMapping.push(combination);
+	}
+	console.log(strokesMapping);
 
 	var typed = '';
 	var typedDate = new Date();
@@ -42,14 +42,14 @@ $(document).ready(function() {
 			typed = typed + String.fromCharCode(e.which);
 		}
 		typedDate = new Date();
-        strokesMapping.some(function (argument) {
-            var index = typed.indexOf(argument.key);
-            if(index >= 0){
-                console.log($('#' + argument.targetId));
-                //Clicks the HTML element. 
-                $('#' + argument.targetId)[0].click();
-            }
-        });
+		strokesMapping.some(function (argument) {
+			var index = typed.indexOf(argument.key);
+			if(index >= 0){
+				console.log($('#' + argument.targetId));
+				//Clicks the HTML element. 
+				$('#' + argument.targetId)[0].click();
+			}
+		});
 	});
 
 });
