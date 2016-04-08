@@ -1,3 +1,38 @@
+/**
+	Arbitrary HotKeys
+	=================
+
+	jQuery plugin that allows you to set arbitrary hotkeys for your HTML page.
+
+	Usage:
+
+	* Link arbitrary-hotkeys.js in your HTML head:
+	```
+		<script type="text/javascript" src="js/arbitrary-hotkeys.js"></script>
+	```
+
+	* Create a div inside head with id="hotkeys" and list the hotkeys you want 
+	in this form - "hotkey || id_of_your_html_hyperlink" (<a> tag)
+	Example:
+	```
+		<div id="hotkeys">
+			git || github
+			goo || google
+		</div>
+	```
+
+	* Enjoy!
+
+	Copyright (C) 2016 Yuri Dias, Gustavo Moraes
+	<https://github.com/Yuri-M-Dias>, <https://github.com/gustavosotnas>
+
+	reusing code by Christian Brassat and Jukka Svahn:
+	<https://github.com/crshd/startpage.rwrt/blob/master/js/script.js>
+
+	Released under MIT license, see the LICENSE file.
+	<https://github.com/Yuri-M-Dias/arbitrary-hotkeys>
+*/
+
 $(document).ready(function() {
 
 	// Detects all hotkeys on the <div id = "hotkeys">
