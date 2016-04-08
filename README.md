@@ -1,6 +1,9 @@
 Arbitrary Hotkeys
 =================
 
+[![GitHub license](https://img.shields.io/github/license/Yuri-M-Dias/arbitrary-hotkeys.svg)](https://github.com/Yuri-M-Dias/arbitrary-hotkeys/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/Yuri-M-Dias/arbitrary-hotkeys.svg)](https://github.com/Yuri-M-Dias/arbitrary-hotkeys/releases/latest)
+
 jQuery plugin that allows you to set arbitrary hotkeys for hyperlinks in your HTML page.
 
 ![demonstration_arbitrary-hotkeys](../../wiki/assets/images/demonstration.gif)
