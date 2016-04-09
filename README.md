@@ -17,14 +17,12 @@ Usage
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/arbitrary-hotkeys.js"></script>
 ```
-* Create a *div* inside *head* with **id="*hotkeys*"** and list the hotkeys you want 
-	in this form: <br> `"hotkey || id_of_your_html_hyperlink"` (*a* HTML tag) <br>
+* Create a HTML tag inside *head* named "***hotkey***" and list the hotkeys you want 
+	in this form: <br> `<hotkey key="your_hotkey" targetId="id_of_your_html_hyperlink"></hotkey>` (*a* HTML tag) <br>
 	Example:
 ```html
-<div id="hotkeys">
-	git || github
-	goo || google
-</div>
+    <hotkey key="git" targetId="github"></hotkey>
+    <hotkey key="goo" targetId="google"></hotkey>
 ```
 For this example of hiperlink in HTML *body*:
 ```html
@@ -33,6 +31,8 @@ For this example of hiperlink in HTML *body*:
 ```
 
 * Enjoy!
+
+An **example** of HTML document using ***arbitrary-hotkeys.js***: [Example](https://github.com/gustavosotnas/startpage.rwrt/blob/master/ead.inf.ufg.html)
 
 Troubleshooting
 ---------------
@@ -47,7 +47,7 @@ Arbitrary Hotkeys is distributed under the terms of the **MIT License**. See the
 
 Bug tracker
 -----------
-Found a bug? Want to suggest a new feature or improvement? Let us know [here](https://github.com/gustavosotnas/avd-launcher/issues) on GitHub!
+Found a bug? Want to suggest a new feature or improvement? Let us know [here](../../issues) on GitHub!
 
 Authors
 -------
