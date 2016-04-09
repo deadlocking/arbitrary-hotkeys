@@ -32,34 +32,34 @@
 	<https://github.com/Yuri-M-Dias/arbitrary-hotkeys>
 */
 
-$(document.createElement('hotkey'));
-$(document.createAttribute('key'));
-$(document.createAttribute('targetId'));
-
 $(document).ready(function() {
 
 	// Detects all hotkeys on the <hotkey> tag
 	var hotkeys = document.getElementsByTagName('hotkey');
 
-	//Cleans the HTML
-	$('hotkey').empty();
-
+	// Declares an array of objects
 	var strokesMapping = [];
 
 	// maps each stroke to an object
 	for(var key in hotkeys){
-
-		//Maps to a nice object because it's more organized this way, though not needed.
+		// A "key" called 'length' is erroneously recognized by browser here.
+		// 'length' doesn't have attributes, so this "if" statement avoids to 
+		// throw a TypeError exception and eliminating all other hotkeys
+		// at assigning "key" and "targetId" object attributes.
+		if (key === 'length') {
+			break;
+		}
+		// Maps to an object: it's more organized this way, but not needed.
 		var combination = {
 			key: hotkeys[key].attributes[0].value,
 			targetId: hotkeys[key].attributes[1].value
 		};
-		//Eliminates undefined ones
+		// Eliminates undefined ones
 		if(combination.key === void 0 || combination.key === '' ||
 				combination.targetId === void 0 || combination.targetId === ''){
 			continue;
 		}
-		//Adds to the avaliable ones.
+		// Adds to the avaliable ones
 		strokesMapping.push(combination);
 	}
 	console.log(strokesMapping);
@@ -90,5 +90,4 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 });
