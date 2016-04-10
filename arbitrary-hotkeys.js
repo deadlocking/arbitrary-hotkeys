@@ -1,29 +1,68 @@
+/**
+	Arbitrary HotKeys
+	=================
+
+	jQuery plugin that allows you to set arbitrary hotkeys for your HTML page.
+
+	Usage:
+
+	* Link arbitrary-hotkeys.js in your HTML head:
+	```
+		<script type="text/javascript" src="js/arbitrary-hotkeys.js"></script>
+	```
+
+	* Create a div inside head with id="hotkeys" and list the hotkeys you want 
+	in this form:
+	`<hotkey key="your_hotkey" targetId="id_of_your_html_hyperlink"></hotkey>`
+	Example:
+	```
+		<hotkey key="git" targetId="github"></hotkey>
+		<hotkey key="goo" targetId="google"></hotkey>
+	```
+
+	* Enjoy!
+
+	Copyright (C) 2016 Yuri Dias, Gustavo Moraes
+	<https://github.com/Yuri-M-Dias>, <https://github.com/gustavosotnas>
+
+	reusing code by Christian Brassat and Jukka Svahn:
+	<https://github.com/crshd/startpage.rwrt/blob/master/js/script.js>
+
+	Released under MIT license, see the LICENSE file.
+	<https://github.com/Yuri-M-Dias/arbitrary-hotkeys>
+*/
+
 $(document).ready(function() {
 
-    // Detects all keystrokes on the <div id = "keyStrokes">
-	var keyStrokes = $("#keyStrokes").text().split("\n");
-    //Cleans the HTML
-    $("#keyStrokes").empty();
+	// Detects all hotkeys on the <hotkey> tag
+	var hotkeys = document.getElementsByTagName('hotkey');
 
-    var strokesMapping = [];
-    // maps each stroke to an object
-    for(var key in keyStrokes){
-        //Splits on the ||
-        var map = keyStrokes[key].split("||");
-        //Maps to a nice object because it's more organized this way, though not needed.
-        var combination = {
-            key: jQuery.trim(map[0]),
-            targetId: jQuery.trim(map[1])
-        };
-        //Eliminates undefined ones
-        if(combination.key === void 0 || combination.key === '' ||
-                combination.targetId === void 0 || combination.targetId === ''){
-            continue;
-        }
-        //Adds to the avaliable ones.
-        strokesMapping.push(combination);
-    }
-    console.log(strokesMapping);
+	// Declares an array of objects
+	var strokesMapping = [];
+
+	// maps each stroke to an object
+	for(var key in hotkeys){
+		// A "key" called 'length' is erroneously recognized by browser here.
+		// 'length' doesn't have attributes, so this "if" statement avoids to 
+		// throw a TypeError exception and eliminating all other hotkeys
+		// at assigning "key" and "targetId" object attributes.
+		if (key === 'length') {
+			break;
+		}
+		// Maps to an object: it's more organized this way, but not needed.
+		var combination = {
+			key: hotkeys[key].attributes[0].value,
+			targetId: hotkeys[key].attributes[1].value
+		};
+		// Eliminates undefined ones
+		if(combination.key === void 0 || combination.key === '' ||
+				combination.targetId === void 0 || combination.targetId === ''){
+			continue;
+		}
+		// Adds to the avaliable ones
+		strokesMapping.push(combination);
+	}
+	console.log(strokesMapping);
 
 	var typed = '';
 	var typedDate = new Date();
@@ -42,14 +81,13 @@ $(document).ready(function() {
 			typed = typed + String.fromCharCode(e.which);
 		}
 		typedDate = new Date();
-        strokesMapping.some(function (argument) {
-            var index = typed.indexOf(argument.key);
-            if(index >= 0){
-                console.log($('#' + argument.targetId));
-                //Clicks the HTML element. 
-                $('#' + argument.targetId)[0].click();
-            }
-        });
+		strokesMapping.some(function (argument) {
+			var index = typed.indexOf(argument.key);
+			if(index >= 0){
+				console.log($('#' + argument.targetId));
+				//Clicks the HTML element. 
+				$('#' + argument.targetId)[0].click();
+			}
+		});
 	});
-
 });
